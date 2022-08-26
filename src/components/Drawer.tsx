@@ -19,11 +19,7 @@ import logo from '../assets/LogoEdmil.png';
 import { HomeDashboard } from './HomeDasboard';
 import { MdDashboard } from 'react-icons/md';
 import { NotPermission } from './NotPermission';
-import { DashBoardAssistencia } from './DashBoardAssistencia';
-import { DashBoardPCE } from './DashBoardPCE';
-import { DashBoardFinanceiro } from './DashBoardFinanceiro';
-import { DashBoardGerencial } from './DashBoardGerencial';
-import { DashBoardComercial } from './DashBoardComercial';
+import { Dashboard } from './Dashboard';
 
 const drawerWidth = 200;
 
@@ -212,7 +208,7 @@ export function DrawerHome() {
                   setShow('3');
                   handleDrawerClose();
                 }}
-                primary={'Dashboard'}
+                primary={'Comercial'}
               />
             </ListItemButton>
           </ListItem>
@@ -229,7 +225,7 @@ export function DrawerHome() {
                   setShow('4');
                   handleDrawerClose();
                 }}
-                primary={'Dashboard'}
+                primary={'Financeiro'}
               />
             </ListItemButton>
           </ListItem>
@@ -246,7 +242,7 @@ export function DrawerHome() {
                   setShow('5');
                   handleDrawerClose();
                 }}
-                primary={'Dashboard'}
+                primary={'Gerencial'}
               />
             </ListItemButton>
           </ListItem>
@@ -263,77 +259,42 @@ export function DrawerHome() {
                   setShow('6');
                   handleDrawerClose();
                 }}
-                primary={'Dashboard'}
+                primary={'PCE'}
               />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdDashboard />
-              </ListItemIcon>
-              <ListItemText
-                onClick={() => {
-                  setShow('7');
-                  handleDrawerClose();
-                }}
-                primary={'Dashboard'}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdDashboard />
-              </ListItemIcon>
-              <ListItemText
-                onClick={() => {
-                  setShow('8');
-                  handleDrawerClose();
-                }}
-                primary={'Dashboard'}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdDashboard />
-              </ListItemIcon>
-              <ListItemText
-                onClick={() => {
-                  setShow('9');
-                  handleDrawerClose();
-                }}
-                primary={'Dashboard'}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
         {show == '1' ? (
           <HomeDashboard />
         ) : show == '2' ? (
-          <DashBoardAssistencia />
+          <Dashboard
+            title="Assistencia"
+            src="https://app.powerbi.com/reportEmbed?reportId=11bbbb06-87e6-4bba-8808-a1e1279ecdc6&autoAuth=true&ctid=a492ebf0-01aa-4c60-95b0-b5517b5127e1"
+          />
         ) : show == '3' ? (
-          <DashBoardPCE />
+          <Dashboard
+            title="Comercial"
+            src="https://app.powerbi.com/reportEmbed?reportId=b23f6f88-7a6a-48c5-a1ba-f93c69394f9c&autoAuth=true&ctid=a492ebf0-01aa-4c60-95b0-b5517b5127e1"
+          />
         ) : show == '4' ? (
-          <DashBoardFinanceiro />
+          <Dashboard
+            title="Financeiro"
+            src="https://app.powerbi.com/reportEmbed?reportId=a8b25f3d-0431-4dc5-8194-c36527be3f6b&autoAuth=true&ctid=a492ebf0-01aa-4c60-95b0-b5517b5127e1"
+          />
         ) : show == '5' ? (
-          <DashBoardGerencial />
+          <Dashboard
+            title="Gerencial"
+            src="https://app.powerbi.com/reportEmbed?reportId=e94f0bbb-e0b7-4a7c-b735-f92b06c21624&autoAuth=true&ctid=a492ebf0-01aa-4c60-95b0-b5517b5127e1"
+          />
         ) : show == '6' ? (
-          <DashBoardComercial />
+          <Dashboard
+            title="PCE"
+            src="https://app.powerbi.com/reportEmbed?reportId=d6fead5d-b89f-4885-b367-8b95bf1be54d&autoAuth=true&ctid=a492ebf0-01aa-4c60-95b0-b5517b5127e1"
+          />
         ) : (
           <NotPermission />
         )}
