@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -11,13 +11,19 @@ import IconButton from '@mui/material/IconButton';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, ListItem, Menu } from '@mui/material';
+import { Button, Collapse, ListItem } from '@mui/material';
 import { BiMenu } from 'react-icons/bi';
 import { IoArrowBackOutline, IoExitOutline } from 'react-icons/io5';
 import { AiOutlineHome } from 'react-icons/ai';
 import logo from '../assets/LogoEdmil.png';
 import { HomeDashboard } from './HomeDasboard';
-import { MdDashboard } from 'react-icons/md';
+import {
+  MdDashboard,
+  MdDashboardCustomize,
+  MdExpandLess,
+  MdExpandMore,
+  MdStarBorder,
+} from 'react-icons/md';
 import { NotPermission } from './NotPermission';
 import { Dashboard } from './Dashboard';
 
@@ -75,6 +81,11 @@ export function DrawerHome() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState('1');
+  const [openSubMenu, setOpenSubMenu] = useState(false);
+
+  const handleClick = () => {
+    setOpenSubMenu(!openSubMenu);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -188,27 +199,10 @@ export function DrawerHome() {
               </ListItemIcon>
               <ListItemText
                 onClick={() => {
-                  setShow('2');
-                  handleDrawerClose();
-                }}
-                primary={'Assistencia'}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdDashboard />
-              </ListItemIcon>
-              <ListItemText
-                onClick={() => {
                   setShow('3');
                   handleDrawerClose();
                 }}
-                primary={'Comercial'}
+                primary={'Simulador Preços V9'}
               />
             </ListItemButton>
           </ListItem>
@@ -225,7 +219,7 @@ export function DrawerHome() {
                   setShow('4');
                   handleDrawerClose();
                 }}
-                primary={'Financeiro'}
+                primary={'Analise CMV - Comparacao'}
               />
             </ListItemButton>
           </ListItem>
@@ -242,29 +236,56 @@ export function DrawerHome() {
                   setShow('5');
                   handleDrawerClose();
                 }}
-                primary={'Gerencial'}
+                primary={'Energia Fotovoltaica'}
               />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdDashboard />
-              </ListItemIcon>
-              <ListItemText
-                onClick={() => {
-                  setShow('6');
-                  handleDrawerClose();
-                }}
-                primary={'PCE'}
-              />
-            </ListItemButton>
-          </ListItem>
+          <ListItemButton onClick={handleClick}>
+            <ListItemIcon>
+              <MdDashboardCustomize /> 
+            </ListItemIcon>
+            <ListItemText primary="PCE" />
+            {openSubMenu ? <MdExpandLess /> : <MdExpandMore />}
+          </ListItemButton>
+          <Collapse in={openSubMenu}>
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton sx={{ pl: 3 }}>
+                  <ListItemIcon>
+                    <MdDashboard />
+                  </ListItemIcon>
+                  <ListItemText
+                    onClick={() => {
+                      setShow('6');
+                      handleDrawerClose();
+                    }}
+                    primary={'PCE - Produtividade WMS'}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <MdDashboard />
+                  </ListItemIcon>
+                  <ListItemText
+                    onClick={() => {
+                      setShow('2');
+                      handleDrawerClose();
+                    }}
+                    primary={'Relatorio Estoque Assistência'}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+          </Collapse>
         </List>
-        <Divider />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
